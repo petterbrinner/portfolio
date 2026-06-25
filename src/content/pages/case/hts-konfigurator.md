@@ -1,5 +1,5 @@
 ---
-title: Passbokning för Jourhavande Medmänniska
+title: Produktkonfigurator
 description: Summopere calamitas corpus viduo carcer fugiat. Esse valetudo coniecto thymum defluo arbor territo tredecim blandior arceo. Vel acquiro volva adimpleo aestivus uxor somniculosus bonus cuius.
 tags:
   - foo
@@ -13,7 +13,7 @@ techStack:
   - Datastar
 ---
 
-# Passbokning för Jourhavande Medmänniska
+# Produktkonfigurator
 
 Tardus cohaero desparatus maxime casus illo explicabo aetas auxilium. Ascisco thymbra amplexus verto. Uberrime consectetur copia tertius.
 

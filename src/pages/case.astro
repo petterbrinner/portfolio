@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { getCollection } from 'astro:content';
+
+const cases = await getCollection('pages', ({ id }) => id.startsWith('case/'));
+---
+
+<Layout title="Case">
+  <SiteHeader />
+  <main
+  id="article-content"
+  class="grid gap-6 content-start prose p-2 md:pt-(--name-height) w-full max-w-[95ch] h-full md:overflow-y-auto col-[main-start/main-end] row-[main-start/main-end]"
+>
+    <h1>Case</h1>
+    <ul class="not-prose grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] auto-rows-fr items-stretch gap-4">
+      {cases.map((c) => (
+        <li class="self-stretch h-full">
+            <a href={`/${c.id}`} class="h-full flex! flex-col content-start gap-2! p-2! rounded shadow shadow-shadow styled-anchor">
+                <h2 class="font-serif text-2xl">{c.data.title}</h2>
+                <ul class="flex flex-wrap gap-2 pl-0 list-none">
+                    {c.data.tags.map((t) => (
+                        <li class="rounded border px-2 py-0.5 border-current text-xs font-mono">{t}</li>
+                    ))}
+                </ul>
+                <p class="text-sm">{c.data.description}</p>
+                <span class="mt-auto">&rarr;</span>
+            </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>

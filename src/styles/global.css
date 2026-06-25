@@ -12,9 +12,21 @@
 
 @media (prefers-reduced-motion: no-preference) {
     @view-transition {
-      navigation: auto;
+        navigation: auto;
     }
-  }
+}
+
+@theme {
+    --color-shadow: rgb(0 0 0 / 0.1);
+}
+
+@layer theme {
+    :root, :host {
+        @variant dark {
+            --color-shadow: rgb(255 255 255 / 0.1);
+        }
+    }
+}
 
 @layer base {
 	:root {

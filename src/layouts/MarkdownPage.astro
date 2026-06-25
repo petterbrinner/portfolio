@@ -68,7 +68,7 @@ const { title, description, tags, task, solution, techStack } = page.data;
 
 		</aside>
 	<main
-		id="case-content"
+		id="article-content"
 		class="p-2 md:pt-(--name-height) w-full max-w-[95ch] h-full md:overflow-y-auto col-[main-start/main-end] row-[main-start/main-end]"
 	>
 		<article
@@ -84,7 +84,7 @@ const { title, description, tags, task, solution, techStack } = page.data;
 
 <script>
 	const mobileH1 = document.getElementById('page-h1-mobile');
-	const desktopH1 = document.querySelector('#case-content h1');
+	const desktopH1 = document.querySelector('#article-content h1');
 
 	const getActiveH1 = () => {
 		if (window.matchMedia('(min-width: 768px)').matches) {
