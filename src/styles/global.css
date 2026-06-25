@@ -10,30 +10,6 @@
 	--font-mono: var(--font-datatype);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    @view-transition {
-      navigation: auto;
-    }
-
-    :root {
-      view-transition-name: none;
-    }
-
-    #article-content, #aside-content {
-      view-transition-name: changing-content;
-    }
-
-    ::view-transition-old(changing-content) {
-      animation-duration: 200ms;
-      animation-timing-function: ease-out;
-    }
-
-    ::view-transition-new(changing-content) {
-      animation-duration: 400ms;
-      animation-timing-function: ease-in;
-    }
-  }
-
 @theme {
     --color-shadow: rgb(0 0 0 / 0.1);
 }
@@ -53,10 +29,11 @@
 
 	html {
 		@apply antialiased;
+		color-scheme: light dark;
 	}
 
 	body {
-		@apply min-h-dvh bg-stone-100 dark:bg-stone-800  text-stone-700 dark:text-stone-200 font-sans transition-colors duration-200;
+		@apply min-h-dvh bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-200 font-sans;
 		/* background:
 			radial-gradient(at 20% 90%, hsla(0, 84%, 60%, 0.1) 32%, hsla(0, 0%, 100%, 0) 60%),
 			radial-gradient(at 80% 10%, hsla(231, 100%, 93%, 0.1) 22%, hsla(0, 0%, 100%, 0) 60%),

@@ -9,6 +9,11 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://petterjohansson.se',
 
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'load',
+  },
+
   integrations: [
     svelte(),
     sitemap({

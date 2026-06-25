@@ -37,7 +37,7 @@ const jokes = [
         <a href="mailto:petter.johansson@icloud.com" class="mt-2 text-sm styled-anchor">
             petter.johansson@icloud.com
         </a>
-        <a href="tel:0707494047" class="text-sm styled-anchor">
+        <a href="tel:0707494047" class="mt-0.5 text-sm styled-anchor">
             070-749 40 47
         </a>
     </div>
@@ -56,10 +56,10 @@ const jokes = [
         }
     </ul>
     <ThemeToggle client:load wrapperClass="p-2 md:px-4 md:py-3 place-self-start md:place-self-end col-[mode-start/mode-end] row-[mode-start/mode-end]" />
-    <span
-        id="joke"
-        class="p-2 md:px-4 md:py-3 font-serif italic text-sm col-[footer-start/footer-end] row-[footer-start/footer-end] text-balance"
-    ></span>
+    <p
+        class="flex gap-[0.5em] p-2 md:px-4 md:py-3 font-serif italic text-sm col-[footer-start/footer-end] row-[footer-start/footer-end] text-balance"
+    ><span>></span>
+<span id="joke"></span></p>
 </header>
 
 <script define:vars={{ jokes }}>
