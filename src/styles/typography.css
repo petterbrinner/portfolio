@@ -1,0 +1,36 @@
+blockquote {
+	@apply font-serif text-2xl;
+}
+
+.prose {
+    @apply prose-stone dark:prose-invert prose-headings:font-serif prose-headings:font-normal;
+
+    p:has(img) {
+        @apply max-w-none;
+        img {
+            @apply rounded w-full overflow-hidden;
+        }
+    }
+
+    /* Target code blocks, but not code blocks inside pre tags */
+    code:not(pre code):not(& > code) {
+        @apply p-0.5 rounded bg-stone-200 dark:bg-stone-700 shadow;
+    }
+
+}
+
+.prose-mobile-h1 > h1:first-of-type {
+	@apply max-md:hidden;
+}
+
+.styled-anchor,
+.prose a {
+    @apply inline-block px-1 -mx-1 transition hover:bg-stone-800 hover:shadow hover:text-stone-100 dark:hover:bg-stone-100 dark:hover:text-stone-600 text-stone-700 dark:text-stone-200 rounded;
+}
+
+@layer base {
+	.font-mono {
+		font-feature-settings: 'liga' 1, 'calt' 1;
+		font-variant-ligatures: common-ligatures contextual;
+	}
+}

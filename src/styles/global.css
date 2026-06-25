@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import "typography.css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+	--font-sans: var(--font-instrument-sans);
+	--font-serif: var(--font-instrument-serif);
+	--font-mono: var(--font-datatype);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+
+@layer base {
+	:root {
+		--h1-height: 2.5rem;
+	}
+
+	html {
+		@apply antialiased;
+	}
+
+	body {
+		@apply min-h-dvh bg-stone-100 dark:bg-stone-800  text-stone-700 dark:text-stone-200 font-sans transition-colors duration-200;
+		/* background:
+			radial-gradient(at 20% 90%, hsla(0, 84%, 60%, 0.1) 32%, hsla(0, 0%, 100%, 0) 60%),
+			radial-gradient(at 80% 10%, hsla(231, 100%, 93%, 0.1) 22%, hsla(0, 0%, 100%, 0) 60%),
+			radial-gradient(at 90% 80%, hsla(192, 97%, 86%, 0.1) 18%, hsla(0, 0%, 100%, 0) 55%); */
+	}
+
+    ::selection {
+        @apply bg-stone-800 text-stone-50 dark:bg-stone-50 dark:text-stone-800 rounded;
+    }
+}

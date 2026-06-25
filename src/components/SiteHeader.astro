@@ -1,0 +1,82 @@
+---
+import ThemeToggle from './ThemeToggle.svelte';
+
+interface Props {
+	title?: string;
+}
+
+const { title = 'Petter Johansson' } = Astro.props;
+
+const navItems = [
+	{ href: '/', label: 'Start' },
+	{ href: '/profil', label: 'Profil' },
+	{ href: '/case', label: 'Case' },
+];
+
+const jokes = [
+	'Jag har kläderna i garaget; det är en åk-in closet.',
+	'Garnityren gav mig onda aningar; det var persillvilja',
+    'Jag läste medeltida poesi i min ungdom; blir ofta noskaldisk.',
+    'Ambivalenta fotografers förening: Skärpa är ett av våra många fokus.',
+    // 'Servern går på ångkraft; den är veveved-driven.',
+    'Ljumma musikgenrer #1: Ganska-rap.',
+    'Ljumma musikgenrer #2: Tvekno.',
+    'Ljumma musikgenrer #3: Okej-pop.',
+    'Ljumma musikgenrer #4: Si-och-soul.',
+    'Ljumma musikgenrer #5: Tråk\'n roll.',
+    'Ljumma musikgenrer #6: Jorådisco.',
+];
+---
+
+<header class="contents">
+        <div id="name" class="grid col-[name-start/name-end] row-[name-start/name-end] p-2 md:px-4 md:py-3">
+            <a href="/" class="font-serif text-3xl font-semibold whitespace-nowrap styled-anchor">{title}</a>
+            <p class="mt-2 text-sm text-balance">
+                Full-stack developer and designer.
+            </p>
+            <a href="mailto:petter.johansson@icloud.com" class="mt-2 text-sm styled-anchor">
+                petter.johansson@icloud.com
+            </a>
+            <a href="tel:0707494047" class="text-sm styled-anchor">
+                070-749 40 47
+            </a>
+        </div>
+    <ul class="p-2 md:px-4 md:py-3 justify-end flex max-xl:flex-wrap gap-x-4 text-right col-[nav-start/nav-end] row-[nav-start/nav-end]">
+        {
+            navItems.map((item) => (
+                <li>
+                    <a
+                        href={item.href}
+                        class="font-serif text-lg font-medium styled-anchor"
+                    >
+                        {item.label}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+    <ThemeToggle client:load wrapperClass="p-2 md:px-4 md:py-3 place-self-start md:place-self-end col-[mode-start/mode-end] row-[mode-start/mode-end]" />
+    <span
+        id="joke"
+        class="p-2 md:px-4 md:py-3 font-serif italic text-sm col-[footer-start/footer-end] row-[footer-start/footer-end] text-balance"
+    ></span>
+</header>
+
+<script define:vars={{ jokes }}>
+	const name = document.getElementById('name');
+	if (name) {
+		const setNameHeight = () => {
+			document.documentElement.style.setProperty(
+				'--name-height',
+				`${name.offsetHeight}px`,
+			);
+		};
+		setNameHeight();
+		new ResizeObserver(setNameHeight).observe(name);
+	}
+
+	const joke = document.getElementById('joke');
+	if (joke) {
+		joke.textContent = jokes[Math.floor(Math.random() * jokes.length)];
+	}
+</script>

@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from 'astro:content';
+import MarkdownPage from '../layouts/MarkdownPage.astro';
+
+export async function getStaticPaths() {
+	const pages = await getCollection('pages', ({ data }) => {
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
+
+	return pages.map((page) => ({
+		params: { slug: page.id === 'home' ? undefined : page.id },
+		props: { page },
+	}));
+}
+
+const { page } = Astro.props;
+const { Content, headings } = await render(page);
+const h1 = headings.find((heading) => heading.depth === 1);
+---
+
+<MarkdownPage page={page} h1={h1}>
+	<Content />
+</MarkdownPage>
