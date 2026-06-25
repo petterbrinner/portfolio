@@ -29,19 +29,19 @@ const jokes = [
 ---
 
 <header class="contents">
-        <div id="name" class="grid col-[name-start/name-end] row-[name-start/name-end] p-2 md:px-4 md:py-3">
-            <a href="/" class="font-serif text-3xl font-semibold whitespace-nowrap styled-anchor">{title}</a>
-            <p class="mt-2 text-sm text-balance">
-                Full-stack developer and designer.
-            </p>
-            <a href="mailto:petter.johansson@icloud.com" class="mt-2 text-sm styled-anchor">
-                petter.johansson@icloud.com
-            </a>
-            <a href="tel:0707494047" class="text-sm styled-anchor">
-                070-749 40 47
-            </a>
-        </div>
-    <ul class="p-2 md:px-4 md:py-3 justify-end flex max-xl:flex-wrap gap-x-4 text-right col-[nav-start/nav-end] row-[nav-start/nav-end]">
+    <div id="name" class="grid col-[name-start/name-end] row-[name-start/name-end] p-2 md:px-4 md:py-3">
+        <a href="/" class="font-serif text-3xl font-semibold whitespace-nowrap styled-anchor">{title}</a>
+        <p class="mt-2 text-sm text-balance">
+            Full-stack developer and designer.
+        </p>
+        <a href="mailto:petter.johansson@icloud.com" class="mt-2 text-sm styled-anchor">
+            petter.johansson@icloud.com
+        </a>
+        <a href="tel:0707494047" class="text-sm styled-anchor">
+            070-749 40 47
+        </a>
+    </div>
+    <ul class="p-2 md:px-4 md:py-3 justify-end flex max-md:flex-col gap-x-4 text-right col-[nav-start/nav-end] row-[nav-start/nav-end]">
         {
             navItems.map((item) => (
                 <li>

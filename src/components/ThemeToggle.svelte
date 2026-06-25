@@ -54,7 +54,7 @@
 	<button
 		type="button"
 		onclick={toggle}
-		class="grid p-2 -m-1 transition rounded-full text-stone-600 dark:text-stone-100 place-items-center hover:bg-stone-800 hover:text-stone-50 dark:hover:bg-stone-50 dark:hover:text-stone-600"
+		class="grid p-2 -m-0.5 md:-m-1 transition rounded-full text-stone-600 dark:text-stone-100 place-items-center hover:bg-stone-800 hover:text-stone-50 dark:hover:bg-stone-50 dark:hover:text-stone-600"
 		aria-label={labels[preference]}
 		title={labels[preference]}
 	>
