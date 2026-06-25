@@ -2,6 +2,7 @@
 import { Font } from 'astro:assets';
 import Head from '../components/Head.astro';
 import { pageTitle, SITE } from '../lib/seo';
+import { THEME_SURFACE_COLORS } from '../lib/theme';
 import '../styles/global.css';
 
 interface Props {
@@ -30,18 +31,41 @@ const resolvedTitle = pageTitle(title);
 <!doctype html>
 <html lang="sv">
 	<head>
-		<script is:inline>
+		<script is:inline define:vars={{ themeSurfaceColors: THEME_SURFACE_COLORS }}>
 			(function () {
 				const stored = localStorage.getItem('theme');
 				const preference =
 					stored === 'light' || stored === 'dark' ? stored : 'system';
-				document.documentElement.dataset.themePreference = preference;
-				document.documentElement.classList.toggle(
-					'dark',
+				const dark =
 					preference === 'dark' ||
-						(preference === 'system' &&
-							window.matchMedia('(prefers-color-scheme: dark)').matches),
+					(preference === 'system' &&
+						window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+				document.documentElement.dataset.themePreference = preference;
+				document.documentElement.classList.toggle('dark', dark);
+
+				const color = dark
+					? themeSurfaceColors.dark
+					: themeSurfaceColors.light;
+
+				for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+					meta.remove();
+				}
+
+				const themeColor = document.createElement('meta');
+				themeColor.name = 'theme-color';
+				themeColor.content = color;
+				document.head.appendChild(themeColor);
+
+				const colorScheme = document.querySelector('meta[name="color-scheme"]');
+				if (colorScheme) colorScheme.setAttribute('content', dark ? 'dark' : 'light');
+
+				const appleStatus = document.querySelector(
+					'meta[name="apple-mobile-web-app-status-bar-style"]',
 				);
+				if (appleStatus) {
+					appleStatus.setAttribute('content', dark ? 'black' : 'default');
+				}
 			})();
 		</script>
 		<Font cssVariable="--font-instrument-sans" preload />
@@ -49,6 +73,18 @@ const resolvedTitle = pageTitle(title);
 		<Font cssVariable="--font-datatype" />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="color-scheme" content="light dark" />
+		<meta
+			name="theme-color"
+			content={THEME_SURFACE_COLORS.light}
+			media="(prefers-color-scheme: light)"
+		/>
+		<meta
+			name="theme-color"
+			content={THEME_SURFACE_COLORS.dark}
+			media="(prefers-color-scheme: dark)"
+		/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<Head
