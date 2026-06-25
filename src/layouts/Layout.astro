@@ -31,12 +31,18 @@ const resolvedTitle = pageTitle(title);
 <html lang="sv">
 	<head>
 		<script is:inline>
-			document.documentElement.classList.toggle(
-				'dark',
-				localStorage.theme === 'dark' ||
-					(!('theme' in localStorage) &&
-						window.matchMedia('(prefers-color-scheme: dark)').matches),
-			);
+			(function () {
+				const stored = localStorage.getItem('theme');
+				const preference =
+					stored === 'light' || stored === 'dark' ? stored : 'system';
+				document.documentElement.dataset.themePreference = preference;
+				document.documentElement.classList.toggle(
+					'dark',
+					preference === 'dark' ||
+						(preference === 'system' &&
+							window.matchMedia('(prefers-color-scheme: dark)').matches),
+				);
+			})();
 		</script>
 		<Font cssVariable="--font-instrument-sans" preload />
 		<Font cssVariable="--font-instrument-serif" preload />
