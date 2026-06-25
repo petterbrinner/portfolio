@@ -1,0 +1,55 @@
+---
+import { SITE } from '../lib/seo';
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	imageAlt?: string;
+	type?: 'website' | 'article';
+	noindex?: boolean;
+	schema?: object | object[];
+}
+
+const {
+	title,
+	description = SITE.defaultDescription,
+	image = SITE.defaultOgImage,
+	imageAlt,
+	type = 'website',
+	noindex = false,
+	schema,
+} = Astro.props;
+
+const canonicalURL = Astro.site
+	? new URL(Astro.url.pathname, Astro.site)
+	: Astro.url;
+const ogImage = Astro.site
+	? new URL(image, Astro.site)
+	: new URL(image, Astro.url);
+const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+---
+
+<link rel="canonical" href={canonicalURL} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex" />}
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content={SITE.locale} />
+{imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{
+	schemas.map((entry) => (
+		<script type="application/ld+json" set:html={JSON.stringify(entry)} />
+	))
+}

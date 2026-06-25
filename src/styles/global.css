@@ -14,6 +14,16 @@
     @view-transition {
         navigation: auto;
     }
+
+    ::view-transition-old(root) {
+        animation-duration: 200ms;
+        animation-timing-function: ease-out;
+    }
+
+    ::view-transition-new(root) {
+        animation-duration: 400ms;
+        animation-timing-function: ease-in;
+    }
 }
 
 @theme {

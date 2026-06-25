@@ -1,6 +1,6 @@
 ---
 title: Portfolio
-description: Designer and developer building thoughtful digital experiences.
+description: Full-stack webbutvecklare och -designer
 ---
 # Om mig
 <div class="grid grid-cols-[auto_1fr] gap-x-6">

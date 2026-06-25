@@ -3,14 +3,22 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import svelte from '@astrojs/svelte';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://petterjohansson.se',
+
+  integrations: [
+    svelte(),
+    sitemap({
+      filter: (page) => !page.includes('/404'),
+    }),
+  ],
+
   vite: {
     plugins: [tailwindcss()],
   },
-
-  integrations: [svelte()],
 
   fonts: [
     {

@@ -3,6 +3,11 @@ import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from 'astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import Layout from './Layout.astro';
+import {
+	articleSchema,
+	personSchema,
+	websiteSchema,
+} from '../lib/seo';
 
 interface Props {
 	page: CollectionEntry<'pages'>;
@@ -10,10 +15,35 @@ interface Props {
 }
 
 const { page, h1 } = Astro.props;
-const { title, description, tags, task, solution, techStack } = page.data;
+const { title, description, tags, task, solution, techStack, ogImage, noindex } =
+	page.data;
+
+const siteUrl = Astro.site!.href;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const isCase = page.id.startsWith('case/');
+
+const schema =
+	page.id === 'home'
+		? [personSchema(siteUrl), websiteSchema(siteUrl)]
+		: isCase
+			? articleSchema({
+					title,
+					description,
+					url: pageUrl,
+					tags,
+					siteUrl,
+				})
+			: undefined;
 ---
 
-<Layout title={title} description={description}>
+<Layout
+	title={title}
+	description={description}
+	image={ogImage}
+	type={isCase ? 'article' : 'website'}
+	noindex={noindex}
+	schema={schema}
+>
 	<SiteHeader />
     <aside class="grid gap-6 mt-(--h1-height) p-2 col-[aside-start/aside-end] row-[aside-start/aside-end]">
 		{

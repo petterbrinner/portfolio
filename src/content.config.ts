@@ -7,6 +7,8 @@ const pages = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
+		ogImage: z.string().optional(),
+		noindex: z.boolean().default(false),
 		draft: z.boolean().default(false),
 		tags: z.array(z.string()).default([]),
 		task: z.string().optional(),

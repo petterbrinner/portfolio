@@ -2,11 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { getCollection } from 'astro:content';
+import { collectionPageSchema } from '../lib/seo';
 
 const cases = await getCollection('pages', ({ id }) => id.startsWith('case/'));
+
+const description = 'Selected case studies by Petter Johansson';
+const schema = collectionPageSchema({
+	name: 'Case',
+	description,
+	url: new URL('/case', Astro.site).href,
+});
 ---
 
-<Layout title="Case">
+<Layout title="Case" description={description} schema={schema}>
   <SiteHeader />
   <main
   id="article-content"

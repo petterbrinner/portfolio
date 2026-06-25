@@ -1,6 +1,6 @@
 ---
 title: Portfolio
-description: Designer and developer building thoughtful digital experiences.
+description: Full-stack webbutvecklare och -designer
 ---
 
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.

@@ -29,7 +29,7 @@
 
 .styled-anchor,
 .prose a {
-    @apply inline-block px-1 -mx-1 transition hover:bg-stone-800 hover:shadow hover:text-stone-100 dark:hover:bg-stone-100 dark:hover:text-stone-700 text-stone-700 dark:text-stone-200 rounded hover:bg-radial-[at_20%_0%] from-stone-600 to-stone-800 dark:from-stone-200 dark:to-stone-400;
+    @apply inline-block px-1 -mx-1 transition-[background-color,box-shadow] duration-500 hover:bg-stone-800 hover:shadow hover:text-stone-100 dark:hover:bg-stone-100 dark:hover:text-stone-700 text-stone-700 dark:text-stone-200 rounded hover:bg-radial-[at_20%_0%] from-stone-600 to-stone-800 dark:from-stone-200 dark:to-stone-400;
 }
 
 @layer base {

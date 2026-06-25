@@ -2,13 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Not found">
-	<main class="grid min-h-[50vh] place-items-center p-8">
-		<div class="text-center">
-			<h1 class="font-serif text-3xl">Page not found</h1>
-			<p class="mt-2 text-stone-600 dark:text-stone-300">
-				<a href="/" class="styled-anchor">Back home</a>
-			</p>
+<Layout title="Not found" noindex>
+	<main class="grid min-h-[50vh] place-items-center p-8 col-[main-start/main-end] row-[main-start/main-end]">
+		<div class="prose">
+			<blockquote>
+                Not all who wander are lost.
+                <footer>— J.R.R. Tolkien, <cite>The Hobbit</cite></footer>
+            </blockquote>
+			<blockquote>
+                I'm lost!
+                <footer>— You, now</footer>
+            </blockquote>
+            <a href="/" class="styled-anchor not-prose">Country road, take me home &rarr;</a>
 		</div>
 	</main>
 </Layout>
