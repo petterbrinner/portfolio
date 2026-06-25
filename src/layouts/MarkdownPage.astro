@@ -45,7 +45,7 @@ const schema =
 	schema={schema}
 >
 	<SiteHeader />
-    <aside class="grid gap-6 mt-(--h1-height) p-2 col-[aside-start/aside-end] row-[aside-start/aside-end]">
+    <aside id="aside-content" class="grid gap-6 mt-(--h1-height) p-2 col-[aside-start/aside-end] row-[aside-start/aside-end]">
 		{
 			h1 && (
 				<header
@@ -58,7 +58,7 @@ const schema =
 				</header>
 			)
 		}
-        <div class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] items-start  content-start gap-6 p-2 font-mono text-sm transition duration-500 rounded shadow empty:hidden bg-stone-200 dark:bg-stone-700 text-balance starting:opacity-0">
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] items-start  content-start gap-6 p-2 font-mono text-sm transition duration-500 rounded shadow-inner empty:hidden bg-stone-200 dark:bg-stone-700 text-balance starting:opacity-0">
 
 			{tags.length > 0 && (
 				<section class="grid gap-2">

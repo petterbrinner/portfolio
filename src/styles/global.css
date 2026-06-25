@@ -12,19 +12,27 @@
 
 @media (prefers-reduced-motion: no-preference) {
     @view-transition {
-        navigation: auto;
+      navigation: auto;
     }
 
-    ::view-transition-old(root) {
-        animation-duration: 200ms;
-        animation-timing-function: ease-out;
+    :root {
+      view-transition-name: none;
     }
 
-    ::view-transition-new(root) {
-        animation-duration: 400ms;
-        animation-timing-function: ease-in;
+    #article-content, #aside-content {
+      view-transition-name: changing-content;
     }
-}
+
+    ::view-transition-old(changing-content) {
+      animation-duration: 200ms;
+      animation-timing-function: ease-out;
+    }
+
+    ::view-transition-new(changing-content) {
+      animation-duration: 400ms;
+      animation-timing-function: ease-in;
+    }
+  }
 
 @theme {
     --color-shadow: rgb(0 0 0 / 0.1);
