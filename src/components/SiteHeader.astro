@@ -17,7 +17,7 @@ const jokes = [
 	'Jag förvarar kläderna i garaget; det är en åk-in closet.',
 	'Garnityren ger mig onda aningar; det är persillvilja',
     'Jag läste medeltida poesi i min ungdom; blir ofta noskaldisk.',
-    'Ambivalenta fotografers förening: Skärpa är ett av våra många fokus.',
+    'Ambivalenta fotografers förening: ”Skärpa är ett av våra många fokus.”',
     // 'Servern går på ångkraft; den är veveved-driven.',
     'Ljumma musikgenrer #1: Ganska-rap.',
     'Ljumma musikgenrer #2: Tvekno.',
@@ -57,9 +57,11 @@ const jokes = [
     </ul>
     <ThemeToggle client:load wrapperClass="p-2 md:px-4 md:py-3 place-self-start md:place-self-end col-[mode-start/mode-end] row-[mode-start/mode-end]" />
     <p
-        class="flex gap-[0.5em] p-2 md:px-4 md:py-3 font-serif italic text-sm col-[footer-start/footer-end] row-[footer-start/footer-end] text-balance"
-    ><span>></span>
-<span id="joke"></span></p>
+        class="flex gap-[0.5em] p-2 md:px-4 md:py-3 font-serif italic text-sm col-[footer-start/footer-end] row-[footer-start/footer-end]"
+    >
+        <span>></span>
+        <span id="joke" class="text-balance"></span>
+    </p>
 </header>
 
 <script define:vars={{ jokes }}>

@@ -30,7 +30,7 @@ export default defineConfig({
       name: 'Instrument Sans',
       cssVariable: '--font-instrument-sans',
       provider: fontProviders.google(),
-      weights: [400, 500, 600, 700],
+      weights: [400],
       styles: ['normal', 'italic'],
     },
     {
@@ -44,7 +44,8 @@ export default defineConfig({
       name: 'Datatype',
       cssVariable: '--font-datatype',
       provider: fontProviders.fontsource(),
-      weights: [400, 500, 600, 700],
+      weights: [400],
+      styles: ['normal'],
       fallbacks: ['monospace'],
     },
   ],
