@@ -55,7 +55,11 @@
 			radial-gradient(at 90% 80%, hsla(192, 97%, 86%, 0.1) 18%, hsla(0, 0%, 100%, 0) 55%); */
 	}
 
-    ::selection {
-        @apply bg-stone-800 text-stone-50 dark:bg-stone-50 dark:text-stone-800 rounded;
-    }
+	::selection {
+		@apply bg-stone-800 text-stone-50;
+	}
+
+	.dark ::selection {
+		@apply bg-stone-50 text-stone-800;
+	}
 }
