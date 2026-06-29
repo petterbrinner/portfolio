@@ -6,7 +6,7 @@ export const THEME_LABELS: Record<ThemePreference, string> = {
 	dark: 'Using dark mode. Switch to system appearance.',
 };
 
-/** Matches body `bg-stone-100` / `dark:bg-stone-800`. */
+/** Matches body `bg-mono-100` / `dark:bg-mono-800`. */
 export const THEME_SURFACE_COLORS = {
 	light: '#f5f5f4',
 	dark: '#292524',

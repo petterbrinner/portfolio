@@ -1,40 +1,81 @@
+@utility prose-mono {
+  --tw-prose-body: var(--color-mono-800);
+  --tw-prose-headings: var(--color-mono-900);
+  --tw-prose-lead: var(--color-mono-700);
+  --tw-prose-links: var(--color-mono-900);
+  --tw-prose-bold: var(--color-mono-900);
+  --tw-prose-counters: var(--color-mono-600);
+  --tw-prose-bullets: var(--color-mono-400);
+  --tw-prose-hr: var(--color-mono-300);
+  --tw-prose-quotes: var(--color-mono-900);
+  --tw-prose-quote-borders: var(--color-mono-300);
+  --tw-prose-captions: var(--color-mono-700);
+  --tw-prose-code: var(--color-mono-900);
+  --tw-prose-pre-code: var(--color-mono-100);
+  --tw-prose-pre-bg: var(--color-mono-900);
+  --tw-prose-th-borders: var(--color-mono-300);
+  --tw-prose-td-borders: var(--color-mono-200);
+  --tw-prose-invert-body: var(--color-mono-200);
+  --tw-prose-invert-headings: var(--color-white);
+  --tw-prose-invert-lead: var(--color-mono-300);
+  --tw-prose-invert-links: var(--color-white);
+  --tw-prose-invert-bold: var(--color-white);
+  --tw-prose-invert-counters: var(--color-mono-400);
+  --tw-prose-invert-bullets: var(--color-mono-600);
+  --tw-prose-invert-hr: var(--color-mono-700);
+  --tw-prose-invert-quotes: var(--color-mono-100);
+  --tw-prose-invert-quote-borders: var(--color-mono-700);
+  --tw-prose-invert-captions: var(--color-mono-400);
+  --tw-prose-invert-code: var(--color-white);
+  --tw-prose-invert-pre-code: var(--color-mono-300);
+  --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
+  --tw-prose-invert-th-borders: var(--color-mono-600);
+  --tw-prose-invert-td-borders: var(--color-mono-700);
+}
 
 .prose {
-    @apply prose-stone dark:prose-invert prose-headings:font-serif prose-headings:font-normal;
+  @apply prose-mono dark:prose-invert prose-headings:font-serif prose-headings:font-normal;
 
-    p:has(img) {
-        @apply max-w-none;
-        img {
-            @apply rounded w-full overflow-hidden;
-        }
-    }
+  figure {
+    @apply relative grid place-items-center max-w-none p-2 mt-0 rounded shadow bg-mono-200 dark:bg-mono-700;
+  }
 
-    /* Target code blocks, but not code blocks inside pre tags */
-    code:not(pre code):not(& > code) {
-        @apply p-0.5 rounded bg-stone-200 dark:bg-stone-700 shadow;
-    }
+  figure.duotone {
+    @apply after:absolute after:inset-0 after:z-10 after:w-full after:h-full after:bg-mono-800 after:mix-blend-lighten;
+  }
 
-    blockquote {
-        @apply font-serif text-2xl text-balance;
-    }
+  figure img {
+    @apply relative w-auto h-auto rounded-[2px] grayscale;
+  }
 
-    blockquote footer {
-        @apply mt-4 block text-base not-italic text-stone-600 dark:text-stone-400;
-    }
+  /* Target code blocks, but not code blocks inside pre tags */
+  code:not(pre code):not(& > code) {
+    @apply p-0.5 rounded bg-mono-200 dark:bg-mono-700 shadow;
+  }
+
+  blockquote {
+    @apply font-serif text-2xl text-balance;
+  }
+
+  blockquote footer {
+    @apply mt-4 block text-base not-italic text-mono-600 dark:text-mono-400;
+  }
 }
 
 .prose-mobile-h1 > h1:first-of-type {
-	@apply max-md:hidden;
+  @apply max-md:hidden;
 }
 
 .styled-anchor,
 .prose a {
-    @apply inline-block px-1 -mx-1 transition-[background-color,box-shadow] duration-500 hover:bg-stone-800 hover:shadow-xl hover:text-stone-100 dark:hover:bg-stone-100 dark:hover:text-stone-700 text-stone-700 dark:text-stone-200 rounded hover:bg-radial-[at_20%_0%] from-stone-600 to-stone-800 dark:from-stone-200 dark:to-stone-400;
+  @apply inline-block px-1 -mx-1 transition-[background-color,box-shadow] duration-500 hover:bg-mono-800 hover:shadow-xl hover:text-mono-100 dark:hover:bg-mono-100 dark:hover:text-mono-700 text-mono-700 dark:text-mono-200 rounded hover:bg-radial-[at_20%_0%] from-mono-600 to-mono-800 dark:from-mono-200 dark:to-mono-400;
 }
 
 @layer base {
-	.font-mono {
-		font-feature-settings: 'liga' 1, 'calt' 1;
-		font-variant-ligatures: common-ligatures contextual;
-	}
+  .font-mono {
+    font-feature-settings:
+      "liga" 1,
+      "calt" 1;
+    font-variant-ligatures: common-ligatures contextual;
+  }
 }

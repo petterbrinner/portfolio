@@ -5,46 +5,61 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-	--font-sans: var(--font-instrument-sans);
-	--font-serif: var(--font-instrument-serif);
-	--font-mono: var(--font-datatype);
+  --font-sans: var(--font-instrument-sans);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-datatype);
+
+  --color-mono-50: var(--color-stone-50);
+  --color-mono-100: var(--color-stone-100);
+  --color-mono-200: var(--color-stone-200);
+  --color-mono-300: var(--color-stone-300);
+  --color-mono-400: var(--color-stone-400);
+  --color-mono-500: var(--color-stone-500);
+  --color-mono-600: var(--color-stone-600);
+  --color-mono-700: var(--color-stone-700);
+  --color-mono-800: var(--color-stone-800);
+  --color-mono-900: var(--color-stone-900);
+
+  /* --color-mono-50: var(--color-indigo-50);
+  --color-mono-100: var(--color-indigo-100);
+  --color-mono-200: var(--color-indigo-200);
+  --color-mono-300: var(--color-indigo-300);
+  --color-mono-400: var(--color-indigo-400);
+  --color-mono-500: var(--color-indigo-500);
+  --color-mono-600: var(--color-indigo-600);
+  --color-mono-700: var(--color-indigo-700);
+  --color-mono-800: var(--color-indigo-800);
+  --color-mono-900: var(--color-indigo-900); */
 }
 
 @theme {
-    --color-shadow: rgb(0 0 0 / 0.1);
+  --color-shadow: rgb(0 0 0 / 0.1);
 }
 
 @layer theme {
-    :root, :host {
-        @variant dark {
-            --color-shadow: rgb(255 255 255 / 0.1);
-        }
+  :root,
+  :host {
+    @variant dark {
+      --color-shadow: rgb(255 255 255 / 0.1);
     }
+  }
 }
 
 @layer base {
-	:root {
-		--h1-height: 2.5rem;
-	}
+  :root {
+    --h1-height: 2.5rem;
+  }
 
-	html {
-		@apply antialiased;
-		color-scheme: light dark;
-	}
+  html {
+    @apply antialiased;
+    color-scheme: light dark;
+  }
 
-	body {
-		@apply min-h-dvh bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-200 font-sans;
-		/* background:
-			radial-gradient(at 20% 90%, hsla(0, 84%, 60%, 0.1) 32%, hsla(0, 0%, 100%, 0) 60%),
-			radial-gradient(at 80% 10%, hsla(231, 100%, 93%, 0.1) 22%, hsla(0, 0%, 100%, 0) 60%),
-			radial-gradient(at 90% 80%, hsla(192, 97%, 86%, 0.1) 18%, hsla(0, 0%, 100%, 0) 55%); */
-	}
+  ::selection {
+    @apply bg-mono-800 text-mono-50;
+  }
 
-	::selection {
-		@apply bg-stone-800 text-stone-50;
-	}
-
-	.dark ::selection {
-		@apply bg-stone-50 text-stone-800;
-	}
+  .dark ::selection {
+    @apply bg-mono-50 text-mono-800;
+  }
 }

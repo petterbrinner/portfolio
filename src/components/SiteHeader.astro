@@ -1,169 +1,96 @@
 ---
-import { THEME_LABELS } from '../lib/theme';
-import sunSvg from '../assets/sun.svg?raw';
-import moonSvg from '../assets/moon.svg?raw';
-import computerSvg from '../assets/computer.svg?raw';
+import ThemeToggle from "./ThemeToggle.svelte";
 
 interface Props {
-	title?: string;
+  title?: string;
 }
 
-const { title = 'Petter Johansson' } = Astro.props;
+const { title = "Petter Johansson" } = Astro.props;
 
 const navItems = [
-	{ href: '/', label: 'Start' },
-	{ href: '/profil', label: 'Profil' },
-	{ href: '/case', label: 'Case' },
+  { href: "/", label: "Start" },
+  { href: "/profil", label: "Profil" },
+  { href: "/case", label: "Case" },
 ];
 
 const jokes = [
-	'Jag förvarar kläderna i garaget; det är en åk-in closet.',
-	'Garnityren ger mig onda aningar; det är persillvilja',
-    'Jag läste medeltida poesi i min ungdom; blir ofta noskaldisk.',
-    'Ambivalenta fotografers förening: ”Skärpa är ett av våra många fokus.”',
-    // 'Servern går på ångkraft; den är veveved-driven.',
-    'Ljumma musikgenrer #1: Ganska-rap.',
-    'Ljumma musikgenrer #2: Tvekno.',
-    'Ljumma musikgenrer #3: Okej-pop.',
-    'Ljumma musikgenrer #4: Si-och-soul.',
-    'Ljumma musikgenrer #5: Tråk\'n roll.',
-    'Ljumma musikgenrer #6: Jorådisco.',
+  "Jag förvarar kläderna i garaget; det är en åk-in closet.",
+  "Garnityren ger mig onda aningar; det är persillvilja",
+  "Jag läste medeltida poesi i min ungdom; blir ofta noskaldisk.",
+  "Ambivalenta fotografers förening: ”Skärpa är ett av våra många fokus.”",
+  // 'Servern går på ångkraft; den är veveved-driven.',
+  "Ljumma musikgenrer #1: Ganska-rap.",
+  "Ljumma musikgenrer #2: Tvekno.",
+  "Ljumma musikgenrer #3: Okej-pop.",
+  "Ljumma musikgenrer #4: Si-och-soul.",
+  "Ljumma musikgenrer #5: Tråk'n roll.",
+  "Ljumma musikgenrer #6: Jorådisco.",
 ];
-
-const themeIcons = [
-	{ preference: 'system', svg: computerSvg },
-	{ preference: 'light', svg: sunSvg },
-	{ preference: 'dark', svg: moonSvg },
-] as const;
 ---
 
 <header class="contents">
-    <div id="name" class="grid col-[name-start/name-end] row-[name-start/name-end] p-2 md:px-4 md:py-3">
-        <a href="/" class="font-serif text-3xl font-semibold whitespace-nowrap styled-anchor">{title}</a>
-        <p class="mt-2 text-sm text-balance">
-            Full-stack webbutvecklare och -designer.
-        </p>
-        <a href="mailto:petter.johansson@icloud.com" class="mt-2 text-sm styled-anchor">
-            petter.johansson@icloud.com
-        </a>
-        <a href="tel:0707494047" class="mt-0.5 text-sm styled-anchor">
-            070-749 40 47
-        </a>
-    </div>
-    <ul class="p-2 md:px-4 md:py-3 justify-end flex max-md:flex-col gap-x-4 text-right col-[nav-start/nav-end] row-[nav-start/nav-end]">
-        {
-            navItems.map((item) => (
-                <li>
-                    <a
-                        href={item.href}
-                        class="font-serif text-lg font-medium styled-anchor"
-                    >
-                        {item.label}
-                    </a>
-                </li>
-            ))
-        }
-    </ul>
-    <div class="p-2 md:px-4 md:py-3 place-self-start md:place-self-end col-[mode-start/mode-end] row-[mode-start/mode-end]">
-        <button
-            id="theme-toggle"
-            type="button"
-            class="theme-toggle grid p-2 -m-0.5 md:-m-1 transition rounded-full text-stone-600 dark:text-stone-100 place-items-center hover:bg-stone-800 hover:text-stone-50 dark:hover:bg-stone-50 dark:hover:text-stone-600"
-            aria-label={THEME_LABELS.system}
-        >
-            <span class="theme-toggle-icon size-4 md:size-4.5">
-                {
-                    themeIcons.map(({ preference, svg }) => (
-                        <span
-                            class="theme-toggle-svg"
-                            data-theme-icon={preference}
-                            set:html={svg}
-                        />
-                    ))
-                }
-            </span>
-        </button>
-    </div>
-    <p
-        class="flex gap-[0.5em] p-2 md:px-4 md:py-3 font-serif italic text-sm col-[footer-start/footer-end] row-[footer-start/footer-end]"
+  <div
+    id="name"
+    class="grid col-[name-start/name-end] row-[name-start/name-end] p-2 md:px-4 md:py-3"
+  >
+    <a
+      href="/"
+      class="font-serif text-3xl font-semibold whitespace-nowrap styled-anchor"
+      >{title}</a
     >
-        <span>></span>
-        <span id="joke" class="text-balance"></span>
+    <p class="mt-2 text-sm text-balance">
+      Full-stack webbutvecklare och -designer.
     </p>
+    <a
+      href="mailto:petter.johansson@icloud.com"
+      class="mt-2 text-sm styled-anchor"
+    >
+      petter.johansson@icloud.com
+    </a>
+    <a href="tel:0707494047" class="mt-0.5 text-sm styled-anchor">
+      070-749 40 47
+    </a>
+  </div>
+  <ul
+    class="p-2 pb-0 md:pb-0 md:px-4 md:py-3 justify-end flex max-md:flex-col gap-x-4 text-right col-[nav-start/nav-end] row-[nav-start/nav-end]"
+  >
+    {
+      navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="font-serif text-lg font-medium styled-anchor"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <ThemeToggle client:load />
+  <p
+    class="flex gap-[0.5em] p-2 md:px-4 md:py-3 font-serif italic text-sm col-[footer-start/footer-end] row-[footer-start/footer-end]"
+  >
+    <span>></span>
+    <span id="joke" class="text-balance"></span>
+  </p>
 </header>
 
-<script is:inline define:vars={{ themeLabels: THEME_LABELS }}>
-	const themeToggle = document.getElementById('theme-toggle');
-	const preference = document.documentElement.dataset.themePreference || 'system';
-	if (themeToggle && themeLabels[preference]) {
-		themeToggle.setAttribute('aria-label', themeLabels[preference]);
-		themeToggle.title = themeLabels[preference];
-	}
-</script>
-
-<script>
-	import {
-		cycleThemePreference,
-		getThemePreferenceFromDocument,
-		setThemePreference,
-		THEME_LABELS,
-	} from '../lib/theme';
-
-	const themeToggle = document.getElementById('theme-toggle');
-
-	themeToggle?.addEventListener('click', () => {
-		const next = cycleThemePreference(getThemePreferenceFromDocument());
-		setThemePreference(next);
-		themeToggle.setAttribute('aria-label', THEME_LABELS[next]);
-		themeToggle.title = THEME_LABELS[next];
-	});
-
-	const media = window.matchMedia('(prefers-color-scheme: dark)');
-	media.addEventListener('change', () => {
-		if (getThemePreferenceFromDocument() === 'system') {
-			setThemePreference('system');
-		}
-	});
-</script>
-
 <script define:vars={{ jokes }}>
-	const name = document.getElementById('name');
-	if (name) {
-		const setNameHeight = () => {
-			document.documentElement.style.setProperty(
-				'--name-height',
-				`${name.offsetHeight}px`,
-			);
-		};
-		setNameHeight();
-		new ResizeObserver(setNameHeight).observe(name);
-	}
+  const name = document.getElementById("name");
+  if (name) {
+    const setNameHeight = () => {
+      document.documentElement.style.setProperty(
+        "--name-height",
+        `${name.offsetHeight}px`,
+      );
+    };
+    setNameHeight();
+    new ResizeObserver(setNameHeight).observe(name);
+  }
 
-	const joke = document.getElementById('joke');
-	if (joke) {
-		joke.textContent = jokes[Math.floor(Math.random() * jokes.length)];
-	}
+  const joke = document.getElementById("joke");
+  if (joke) {
+    joke.textContent = jokes[Math.floor(Math.random() * jokes.length)];
+  }
 </script>
-
-<style>
-	.theme-toggle-icon {
-		display: grid;
-		place-items: center;
-	}
-
-	.theme-toggle-svg {
-		display: none;
-		grid-area: 1 / 1;
-	}
-
-	.theme-toggle-svg :global(svg) {
-		width: 100%;
-		height: 100%;
-	}
-
-	html[data-theme-preference='system'] .theme-toggle-svg[data-theme-icon='system'],
-	html[data-theme-preference='light'] .theme-toggle-svg[data-theme-icon='light'],
-	html[data-theme-preference='dark'] .theme-toggle-svg[data-theme-icon='dark'] {
-		display: block;
-	}
-</style>

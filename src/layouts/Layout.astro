@@ -1,28 +1,28 @@
 ---
-import { Font } from 'astro:assets';
-import Head from '../components/Head.astro';
-import { pageTitle, SITE } from '../lib/seo';
-import { THEME_SURFACE_COLORS } from '../lib/theme';
-import '../styles/global.css';
+import { Font } from "astro:assets";
+import Head from "../components/Head.astro";
+import { pageTitle, SITE } from "../lib/seo";
+import { THEME_SURFACE_COLORS } from "../lib/theme";
+import "../styles/global.css";
 
 interface Props {
-	title?: string;
-	description?: string;
-	image?: string;
-	imageAlt?: string;
-	type?: 'website' | 'article';
-	noindex?: boolean;
-	schema?: object | object[];
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+  noindex?: boolean;
+  schema?: object | object[];
 }
 
 const {
-	title = SITE.name,
-	description = SITE.defaultDescription,
-	image,
-	imageAlt,
-	type = 'website',
-	noindex = false,
-	schema,
+  title = SITE.name,
+  description = SITE.defaultDescription,
+  image,
+  imageAlt,
+  type = "website",
+  noindex = false,
+  schema,
 } = Astro.props;
 
 const resolvedTitle = pageTitle(title);
@@ -30,82 +30,86 @@ const resolvedTitle = pageTitle(title);
 
 <!doctype html>
 <html lang="sv">
-	<head>
-		<script is:inline define:vars={{ themeSurfaceColors: THEME_SURFACE_COLORS }}>
-			(function () {
-				const stored = localStorage.getItem('theme');
-				const preference =
-					stored === 'light' || stored === 'dark' ? stored : 'system';
-				const dark =
-					preference === 'dark' ||
-					(preference === 'system' &&
-						window.matchMedia('(prefers-color-scheme: dark)').matches);
+  <head>
+    <script is:inline define:vars={{ themeSurfaceColors: THEME_SURFACE_COLORS }}
+    >
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const preference =
+          stored === "light" || stored === "dark" ? stored : "system";
+        const dark =
+          preference === "dark" ||
+          (preference === "system" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-				document.documentElement.dataset.themePreference = preference;
-				document.documentElement.classList.toggle('dark', dark);
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.classList.toggle("dark", dark);
 
-				const color = dark
-					? themeSurfaceColors.dark
-					: themeSurfaceColors.light;
+        const color = dark ? themeSurfaceColors.dark : themeSurfaceColors.light;
 
-				for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
-					meta.remove();
-				}
+        for (const meta of document.querySelectorAll(
+          'meta[name="theme-color"]',
+        )) {
+          meta.remove();
+        }
 
-				const themeColor = document.createElement('meta');
-				themeColor.name = 'theme-color';
-				themeColor.content = color;
-				document.head.appendChild(themeColor);
+        const themeColor = document.createElement("meta");
+        themeColor.name = "theme-color";
+        themeColor.content = color;
+        document.head.appendChild(themeColor);
 
-				const colorScheme = document.querySelector('meta[name="color-scheme"]');
-				if (colorScheme) colorScheme.setAttribute('content', dark ? 'dark' : 'light');
+        const colorScheme = document.querySelector('meta[name="color-scheme"]');
+        if (colorScheme)
+          colorScheme.setAttribute("content", dark ? "dark" : "light");
 
-				const appleStatus = document.querySelector(
-					'meta[name="apple-mobile-web-app-status-bar-style"]',
-				);
-				if (appleStatus) {
-					appleStatus.setAttribute('content', dark ? 'black' : 'default');
-				}
-			})();
-		</script>
-		<Font cssVariable="--font-instrument-sans" preload />
-		<Font cssVariable="--font-instrument-serif" preload />
-		<Font cssVariable="--font-datatype" />
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="color-scheme" content="light dark" />
-		<meta
-			name="theme-color"
-			content={THEME_SURFACE_COLORS.light}
-			media="(prefers-color-scheme: light)"
-		/>
-		<meta
-			name="theme-color"
-			content={THEME_SURFACE_COLORS.dark}
-			media="(prefers-color-scheme: dark)"
-		/>
-		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<Head
-			title={resolvedTitle}
-			description={description}
-			image={image}
-			imageAlt={imageAlt}
-			type={type}
-			noindex={noindex}
-			schema={schema}
-		/>
-		<title>{resolvedTitle}</title>
-	</head>
-	<body class="grid w-screen h-screen
-    content-start items-start
-    grid-cols-[[name-start_aside-start_main-start_footer-start]_auto_[name-end_nav-start]_1fr_[nav-end_mode-start]_auto_[mode-end_aside-end_main-end_footer-end]]
-    grid-rows-[[name-start_nav-start_mode-start]_auto_[name-end_nav-end_mode-end_aside-start]_auto_[aside-end_main-start]_1fr_[main-end_footer-start]_auto_[footer-end]]
+        const appleStatus = document.querySelector(
+          'meta[name="apple-mobile-web-app-status-bar-style"]',
+        );
+        if (appleStatus) {
+          appleStatus.setAttribute("content", dark ? "black" : "default");
+        }
+      })();
+    </script>
+    <Font cssVariable="--font-instrument-sans" preload />
+    <Font cssVariable="--font-instrument-serif" preload />
+    <Font cssVariable="--font-datatype" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content={THEME_SURFACE_COLORS.light}
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content={THEME_SURFACE_COLORS.dark}
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <Head
+      title={resolvedTitle}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      type={type}
+      noindex={noindex}
+      schema={schema}
+    />
+    <title>{resolvedTitle}</title>
+  </head>
+  <body
+    class="grid w-screen h-screen
+    content-start items-start gap-px min-h-dvh bg-mono-100 dark:bg-mono-800 text-mono-700 dark:text-mono-200 font-sans
+    grid-cols-[[name-start_aside-start_main-start_footer-start]_1fr_[name-end_nav-start_mode-start]_1fr_[nav-end_mode-end_aside-end_main-end_footer-end]]
+    grid-rows-[[name-start_nav-start]_auto_[nav-end_mode-start]_auto_[name-end_mode-end_aside-start]_auto_[aside-end_main-start]_1fr_[main-end_footer-start]_auto_[footer-end]]
     md:grid-cols-[[name-start_aside-start_footer-start]_280px_[name-end_aside-end_footer-end]_auto_[aside-end]_1rem_[main-start]_auto_[main-end_nav-start_mode-start]_1fr_[nav-end_mode-end]]
     md:grid-rows-[[name-start_nav-start_main-start]_auto_[name-end_nav-end_aside-start]_1fr_[mode-start_footer-start]_auto_[aside-end_main-end_mode-end_footer-end]]
     xl:grid-cols-[[name-start_footer-start]_280px_[name-end_footer-end_aside-start]_280px_[aside-end]_1rem_[main-start]_auto_[main-end_nav-start_mode-start]_1fr_[nav-end_mode-end]]
-    xl:grid-rows-[[name-start_nav-start_main-start]_auto_[name-end_nav-end_aside-start]_1fr_[mode-start_footer-start]_auto_[aside-end_main-end_mode-end_footer-end]]">
-		<slot />
-	</body>
+    xl:grid-rows-[[name-start_nav-start_main-start]_auto_[name-end_nav-end_aside-start]_1fr_[mode-start_footer-start]_auto_[aside-end_main-end_mode-end_footer-end]]"
+  >
+    <slot />
+  </body>
 </html>

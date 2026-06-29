@@ -1,0 +1,68 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import {
+		THEME_LABELS,
+		cycleThemePreference,
+		getThemePreferenceFromDocument,
+		setThemePreference,
+		type ThemePreference,
+	} from '../lib/theme';
+	import sunSvg from '../assets/sun.svg?raw';
+	import moonSvg from '../assets/moon.svg?raw';
+	import computerSvg from '../assets/computer.svg?raw';
+
+	const themeIcons = [
+		{ preference: 'light', label: 'Ljust', svg: sunSvg },
+		{ preference: 'system', label: 'Auto', svg: computerSvg },
+		{ preference: 'dark', label: 'Mörkt', svg: moonSvg },
+	] as const;
+
+	let preference = $state<ThemePreference>('system');
+
+	onMount(() => {
+		preference = getThemePreferenceFromDocument();
+
+		const media = window.matchMedia('(prefers-color-scheme: dark)');
+		const onSystemChange = () => {
+			if (getThemePreferenceFromDocument() === 'system') {
+				setThemePreference('system');
+				preference = 'system';
+			}
+		};
+
+		media.addEventListener('change', onSystemChange);
+		return () => media.removeEventListener('change', onSystemChange);
+	});
+
+	function toggle() {
+		const next = cycleThemePreference(getThemePreferenceFromDocument());
+		setThemePreference(next);
+		preference = next;
+	}
+</script>
+
+<div
+	id="theme-toggle-container"
+	class="p-2 md:px-4 md:py-3 place-self-end col-[mode-start/mode-end] row-[mode-start/mode-end]"
+>
+	<button
+		id="theme-toggle"
+		type="button"
+		class="flex items-center px-0.5 md:p-1 md:px-2! font-serif text-base font-medium transition border rounded styled-anchor gap-x-2 theme-toggle border-current/50 text-mono-600 dark:text-mono-100 hover:bg-mono-800 hover:text-mono-50 dark:hover:bg-mono-50 dark:hover:text-mono-600"
+		aria-label={THEME_LABELS[preference]}
+		title={THEME_LABELS[preference]}
+		onclick={toggle}
+	>
+		{#each themeIcons as { preference: iconPreference, label, svg } (iconPreference)}
+            <span class="flex gap-[0.25em] items-center {preference === iconPreference ? '' : 'hidden'}">
+                <span class="theme-toggle-label">{label}</span>
+                <span
+                    class="grid theme-toggle-svg theme-toggle-icon place-items-center size-4"
+                    data-theme-icon={iconPreference}
+                >
+				{@html svg}
+                </span>
+            </span>
+		{/each}
+	</button>
+</div>

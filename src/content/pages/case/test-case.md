@@ -41,7 +41,10 @@ console.log(greeting);
 
 ## Media
 
-![Placeholder image](https://placehold.co/1200x600?text=Test+Case)
+<figure>
+  <img src="https://placehold.co/1200x600?text=Test+Case" alt="Placeholder image" />
+  <figcaption>Placeholder image for the test case layout</figcaption>
+</figure>
 
 ## Next steps
 

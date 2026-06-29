@@ -11,7 +11,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "astro build && wrangler deploy",
-    "deploy:preview": "astro build && wrangler versions upload"
+    "deploy:preview": "astro build && wrangler versions upload",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -24,6 +26,8 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "prettier": "^3.9.3",
+    "prettier-plugin-astro": "^0.14.1",
     "wrangler": "^4.105.0"
   }
 }
