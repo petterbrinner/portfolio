@@ -1,147 +1,161 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import type { MarkdownHeading } from 'astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import Layout from './Layout.astro';
-import {
-	articleSchema,
-	personSchema,
-	websiteSchema,
-} from '../lib/seo';
+import type { CollectionEntry } from "astro:content";
+import type { MarkdownHeading } from "astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import Layout from "./Layout.astro";
+import { articleSchema, personSchema, websiteSchema } from "../lib/seo";
 
 interface Props {
-	page: CollectionEntry<'pages'>;
-	h1?: MarkdownHeading;
+  page: CollectionEntry<"pages">;
+  h1?: MarkdownHeading;
 }
 
 const { page, h1 } = Astro.props;
-const { title, description, tags, task, solution, techStack, ogImage, noindex } =
-	page.data;
+const {
+  title,
+  description,
+  tags,
+  task,
+  solution,
+  techStack,
+  ogImage,
+  noindex,
+} = page.data;
 
 const siteUrl = Astro.site!.href;
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
-const isCase = page.id.startsWith('case/');
+const isCase = page.id.startsWith("case/");
 
 const schema =
-	page.id === 'home'
-		? [personSchema(siteUrl), websiteSchema(siteUrl)]
-		: isCase
-			? articleSchema({
-					title,
-					description,
-					url: pageUrl,
-					tags,
-					siteUrl,
-				})
-			: undefined;
+  page.id === "home"
+    ? [personSchema(siteUrl), websiteSchema(siteUrl)]
+    : isCase
+      ? articleSchema({
+          title,
+          description,
+          url: pageUrl,
+          tags,
+          siteUrl,
+        })
+      : undefined;
 ---
 
 <Layout
-	title={title}
-	description={description}
-	image={ogImage}
-	type={isCase ? 'article' : 'website'}
-	noindex={noindex}
-	schema={schema}
+  title={title}
+  description={description}
+  image={ogImage}
+  type={isCase ? "article" : "website"}
+  noindex={noindex}
+  schema={schema}
 >
-	<SiteHeader />
-    <aside id="aside-content" class="grid gap-6 mt-(--h1-height) p-2 col-[aside-start/aside-end] row-[aside-start/aside-end] starting:opacity-0 transition duration-500">
-		{
-			h1 && (
-				<header
-					id="page-h1-mobile"
-					class="prose md:hidden"
-				>
-                    <h1>
-					{h1.text}
-                    </h1>
-				</header>
-			)
-		}
-        <div class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] items-start  content-start gap-6 p-2 font-mono text-sm rounded shadow-inner empty:hidden bg-mono-200 dark:bg-mono-700 text-balance">
-
-			{tags.length > 0 && (
-				<section class="grid gap-2">
-					<h2>Tags</h2>
-					<ul class="flex flex-wrap gap-2 pl-0 list-none">
-						{tags.map((tag) => (
-							<li class="rounded border px-2 py-0.5 border-current">
-								{tag}
-							</li>
-						))}
-					</ul>
-				</section>
-			)}
-			{task && (
-				<section class="grid gap-2">
-					<h2>Task</h2>
-					<p>{task}</p>
-				</section>
-			)}
-			{solution && (
-				<section class="grid gap-2">
-					<h2>Solution</h2>
-					<p>{solution}</p>
-				</section>
-			)}
-			{techStack.length > 0 && (
-				<section class="grid gap-2">
-					<h2>Tech Stack</h2>
-					<ul class="pl-5 list-disc">
-						{techStack.map((item) => (
-							<li>{item}</li>
-						))}
-					</ul>
-				</section>
-			)}
-        </div>
-
-		</aside>
-	<main
-		id="article-content"
-		class="p-2 md:pt-(--name-height) w-full max-w-[95ch] h-full md:overflow-y-auto col-[main-start/main-end] row-[main-start/main-end] starting:opacity-0 transition duration-1000"
-	>
-		<article
-			class:list={[
-				'prose max-w-none *:max-w-prose pb-24',
-				{ 'prose-mobile-h1': h1 },
-			]}
-		>
-			<slot />
-		</article>
-	</main>
+  <SiteHeader />
+  <aside
+    id="aside-content"
+    class="grid gap-6 pt-(--h1-height) p-2 col-[aside-start/aside-end] row-[aside-start/aside-end]"
+  >
+    {
+      h1 && (
+        <header id="page-h1-mobile" class="prose md:hidden">
+          <h1>{h1.text}</h1>
+        </header>
+      )
+    }
+    <div
+      class="grid items-start content-start gap-6 p-2 font-mono text-sm rounded shadow-inner empty:hidden bg-mono-200 dark:bg-mono-700 text-balance bg-radial-[at_20%_0%] from-mono-200 to-mono-300 dark:from-mono-700 dark:to-mono-800 border border-current/5 fade-up delay-1000"
+    >
+      {
+        tags.length > 0 && (
+          <section class="grid gap-2">
+            <h2>Tags</h2>
+            <ul class="flex flex-wrap gap-2 pl-0 list-none">
+              {tags.map((tag) => (
+                <li class="rounded border px-2 py-0.5 border-current">{tag}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+      {
+        task && (
+          <section class="grid gap-2">
+            <h2>Task</h2>
+            <p>{task}</p>
+          </section>
+        )
+      }
+      {
+        solution && (
+          <section class="grid gap-2">
+            <h2>Solution</h2>
+            <p>{solution}</p>
+          </section>
+        )
+      }
+      {
+        techStack.length > 0 && (
+          <section class="grid gap-2">
+            <h2>Tech Stack</h2>
+            <ul class="pl-5 list-disc">
+              {techStack.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </div>
+  </aside>
+  <main
+    id="article-content"
+    class="p-2 md:pt-(--header-height) w-full max-w-[95ch] h-full scrollbar-none md:overflow-y-auto col-[main-start/main-end] row-[main-start/main-end] fade-up delay-500"
+  >
+    <article
+      class:list={[
+        "prose max-w-none *:max-w-prose pb-24",
+        { "prose-mobile-h1": h1 },
+      ]}
+    >
+      <slot />
+    </article>
+  </main>
 </Layout>
 
 <script>
-	const mobileH1 = document.getElementById('page-h1-mobile');
-	const desktopH1 = document.querySelector('#article-content h1');
+  const mobileH1 = document.getElementById("page-h1-mobile");
+  const desktopH1 = document.querySelector("#article-content h1");
 
-	const getActiveH1 = () => {
-		if (window.matchMedia('(min-width: 768px)').matches) {
-			return desktopH1;
-		}
-		return mobileH1 ?? desktopH1;
-	};
+  const getActiveH1 = () => {
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      return desktopH1;
+    }
+    return mobileH1 ?? desktopH1;
+  };
 
-	const setH1Height = () => {
-		const h1 = getActiveH1();
-		if (!h1) return;
+  const setH1Height = () => {
+    const h1 = getActiveH1();
+    if (!h1) return;
 
-		const style = window.getComputedStyle(h1);
-		const marginTop = parseFloat(style.marginTop) || 0;
-		const marginBottom = parseFloat(style.marginBottom) || 0;
-		const totalHeight = (h1 as HTMLElement).offsetHeight + marginTop + marginBottom;
-		document.documentElement.style.setProperty('--h1-height', `${totalHeight}px`);
-	};
+    const style = window.getComputedStyle(h1);
+    const marginTop = parseFloat(style.marginTop) || 0;
+    const marginBottom = parseFloat(style.marginBottom) || 0;
+    const totalHeight =
+      (h1 as HTMLElement).offsetHeight + marginTop + marginBottom;
+    document.documentElement.style.setProperty(
+      "--h1-height",
+      `${totalHeight}px`,
+    );
+  };
 
-	const measureTargets = [mobileH1, desktopH1].filter(Boolean);
-	if (measureTargets.length > 0) {
-		setH1Height();
-		const observer = new ResizeObserver(setH1Height);
-		for (const target of measureTargets) {
-			observer.observe(target as Element);
-		}
-		document.fonts?.ready.then(setH1Height);
-		window.matchMedia('(min-width: 768px)').addEventListener('change', setH1Height);
-	}
+  const measureTargets = [mobileH1, desktopH1].filter(Boolean);
+  if (measureTargets.length > 0) {
+    setH1Height();
+    const observer = new ResizeObserver(setH1Height);
+    for (const target of measureTargets) {
+      observer.observe(target as Element);
+    }
+    document.fonts?.ready.then(setH1Height);
+    window
+      .matchMedia("(min-width: 768px)")
+      .addEventListener("change", setH1Height);
+  }
 </script>

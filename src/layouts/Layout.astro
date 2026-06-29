@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import Head from "../components/Head.astro";
+import BackgroundTile from "../components/BackgroundTile.astro";
 import { pageTitle, SITE } from "../lib/seo";
 import { THEME_SURFACE_COLORS } from "../lib/theme";
 import "../styles/global.css";
@@ -102,14 +103,41 @@ const resolvedTitle = pageTitle(title);
   </head>
   <body
     class="grid w-screen h-screen
-    content-start items-start gap-px min-h-dvh bg-mono-100 dark:bg-mono-800 text-mono-700 dark:text-mono-200 font-sans
-    grid-cols-[[name-start_aside-start_main-start_footer-start]_1fr_[name-end_nav-start_mode-start]_1fr_[nav-end_mode-end_aside-end_main-end_footer-end]]
-    grid-rows-[[name-start_nav-start]_auto_[nav-end_mode-start]_auto_[name-end_mode-end_aside-start]_auto_[aside-end_main-start]_1fr_[main-end_footer-start]_auto_[footer-end]]
-    md:grid-cols-[[name-start_aside-start_footer-start]_280px_[name-end_aside-end_footer-end]_auto_[aside-end]_1rem_[main-start]_auto_[main-end_nav-start_mode-start]_1fr_[nav-end_mode-end]]
-    md:grid-rows-[[name-start_nav-start_main-start]_auto_[name-end_nav-end_aside-start]_1fr_[mode-start_footer-start]_auto_[aside-end_main-end_mode-end_footer-end]]
-    xl:grid-cols-[[name-start_footer-start]_280px_[name-end_footer-end_aside-start]_280px_[aside-end]_1rem_[main-start]_auto_[main-end_nav-start_mode-start]_1fr_[nav-end_mode-end]]
-    xl:grid-rows-[[name-start_nav-start_main-start]_auto_[name-end_nav-end_aside-start]_1fr_[mode-start_footer-start]_auto_[aside-end_main-end_mode-end_footer-end]]"
+    content-start items-start p-px gap-px min-h-dvh bg-mono-200/50 dark:bg-mono-700/99 text-mono-700
+    dark:text-mono-200 font-sans md:overflow-hidden
+    filter-[url(#grainy)]
+    grid-cols-[[header-start_aside-start_main-start_footer-start]_1fr_[header-end_nav-start_mode-start]_auto_[nav-end_mode-end_aside-end_main-end_footer-end]]
+    grid-rows-[[header-start_nav-start]_auto_[nav-end]_auto_[mode-start]_auto_[header-end_mode-end_aside-start]_auto_[aside-end_main-start]_1fr_[main-end_footer-start]_auto_[footer-end]]
+    md:grid-cols-[[header-start_aside-start_footer-start]_280px_[header-end_aside-end_footer-end]_auto_[aside-end_main-start]_auto_[main-end_nav-start_mode-start]_1fr_[nav-end_mode-end]]
+    md:grid-rows-[[header-start_nav-start_main-start]_auto_[header-end_nav-end_aside-start]_1fr_[footer-start]_auto_[mode-start]_auto_[aside-end_main-end_mode-end_footer-end]]
+    xl:grid-cols-[[header-start_footer-start]_280px_[header-end_footer-end_aside-start]_280px_[aside-end_main-start]_auto_[main-end_nav-start_mode-start]_140px_[nav-end_mode-end]]
+    xl:grid-rows-[[header-start_nav-start_main-start]_auto_[header-end_nav-end_aside-start]_1fr_[footer-start]_auto_[mode-start]_auto_[aside-end_main-end_mode-end_footer-end]]"
   >
+    <BackgroundTile
+      class="col-[header-start/header-end] row-[header-start/header-end]"
+    />
+    <BackgroundTile
+      class="col-[nav-start/nav-end] row-[nav-start/mode-end] md:row-[nav-start/mode-start]"
+    />
+    <BackgroundTile
+      class="max-md:hidden col-[mode-start/mode-end] row-[mode-start/mode-end]"
+    />
+    <BackgroundTile
+      class="col-[aside-start/aside-end] row-[aside-start/main-end] xl:row-[header-start/aside-end]"
+    />
+    <BackgroundTile
+      class="col-[main-start/main-end] row-[main-start/main-end]"
+    />
+    <BackgroundTile
+      class="col-[footer-start/footer-end] row-[footer-start/footer-end] md:row-[header-end/footer-end]"
+    />
     <slot />
+    <svg width="0" height="0" aria-hidden="true" class="fixed">
+      <filter id="grainy" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="1.33"></feTurbulence>
+        <feColorMatrix type="saturate" values="1"></feColorMatrix>
+        <feBlend mode="hard-light" in="SourceGraphic"></feBlend>
+      </filter>
+    </svg>
   </body>
 </html>

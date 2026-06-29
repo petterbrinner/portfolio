@@ -37,15 +37,12 @@
   @apply prose-mono dark:prose-invert prose-headings:font-serif prose-headings:font-normal;
 
   figure {
-    @apply relative grid place-items-center max-w-none p-2 mt-0 rounded shadow bg-mono-200 dark:bg-mono-700;
+    @apply relative grid place-items-center max-w-none p-2 mt-0 rounded shadow bg-mono-200 dark:bg-mono-700 text-balance bg-radial-[at_20%_0%] from-mono-200 to-mono-300 dark:from-mono-700 dark:to-mono-800 border border-current/5;
   }
 
-  figure.duotone {
-    @apply after:absolute after:inset-0 after:z-10 after:w-full after:h-full after:bg-mono-800 after:mix-blend-lighten;
-  }
-
-  figure img {
-    @apply relative w-auto h-auto rounded-[2px] grayscale;
+  figure img,
+  .styled-image {
+    @apply relative w-auto h-auto max-h-svh rounded-[2px] grayscale;
   }
 
   /* Target code blocks, but not code blocks inside pre tags */
@@ -62,13 +59,17 @@
   }
 }
 
+.duotone {
+  @apply relative after:absolute after:inset-0 after:z-10 after:w-full after:h-full after:bg-mono-800 after:mix-blend-lighten;
+}
+
 .prose-mobile-h1 > h1:first-of-type {
   @apply max-md:hidden;
 }
 
 .styled-anchor,
 .prose a {
-  @apply inline-block px-1 -mx-1 transition-[background-color,box-shadow] duration-500 hover:bg-mono-800 hover:shadow-xl hover:text-mono-100 dark:hover:bg-mono-100 dark:hover:text-mono-700 text-mono-700 dark:text-mono-200 rounded hover:bg-radial-[at_20%_0%] from-mono-600 to-mono-800 dark:from-mono-200 dark:to-mono-400;
+  @apply inline-block px-1 -mx-1 transition-[background-color,box-shadow,border-color] duration-500 hover:bg-mono-800 hover:shadow-xl hover:text-mono-100 dark:hover:bg-mono-100 dark:hover:text-mono-700 text-mono-700 dark:text-mono-200 rounded hover:bg-radial-[at_20%_0%] from-mono-700 to-mono-800 dark:from-mono-200 dark:to-mono-300;
 }
 
 @layer base {

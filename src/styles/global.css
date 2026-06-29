@@ -20,16 +20,16 @@
   --color-mono-800: var(--color-stone-800);
   --color-mono-900: var(--color-stone-900);
 
-  /* --color-mono-50: var(--color-indigo-50);
-  --color-mono-100: var(--color-indigo-100);
-  --color-mono-200: var(--color-indigo-200);
-  --color-mono-300: var(--color-indigo-300);
-  --color-mono-400: var(--color-indigo-400);
-  --color-mono-500: var(--color-indigo-500);
-  --color-mono-600: var(--color-indigo-600);
-  --color-mono-700: var(--color-indigo-700);
-  --color-mono-800: var(--color-indigo-800);
-  --color-mono-900: var(--color-indigo-900); */
+  --color-mono-50: var(--color-taupe-50);
+  --color-mono-100: var(--color-taupe-100);
+  --color-mono-200: var(--color-taupe-200);
+  --color-mono-300: var(--color-taupe-300);
+  --color-mono-400: var(--color-taupe-400);
+  --color-mono-500: var(--color-taupe-500);
+  --color-mono-600: var(--color-taupe-600);
+  --color-mono-700: var(--color-taupe-700);
+  --color-mono-800: var(--color-taupe-800);
+  --color-mono-900: var(--color-taupe-900);
 }
 
 @theme {
@@ -62,4 +62,19 @@
   .dark ::selection {
     @apply bg-mono-50 text-mono-800;
   }
+}
+
+@layer utilities {
+  .fade-in {
+    @apply starting:opacity-0 transition-all duration-500 ease-out;
+  }
+
+  .fade-up {
+    @apply starting:opacity-0 starting:translate-y-3 transition-all duration-500 ease-out;
+  }
+}
+
+/* functionally the same as a style, take it out of documen flow */
+svg[height="0"] {
+  position: fixed;
 }
