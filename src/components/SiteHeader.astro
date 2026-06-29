@@ -13,6 +13,10 @@ const navItems = [
   { href: "/case", label: "Case" },
 ];
 
+const currentPage = Astro.url.pathname;
+const isCurrentPage = (href: string) =>
+  currentPage === href || currentPage.startsWith(href + "/");
+
 const jokes = [
   "Jag förvarar kläderna i garaget; det är en åk-in closet.",
   "Garnityren ger mig onda aningar; det är persillvilja",
@@ -56,7 +60,18 @@ const jokes = [
   >
     {
       navItems.map((item) => (
-        <li>
+        <li class="flex items-center justify-end gap-x-[0.33em]">
+          {isCurrentPage(item.href) ? (
+            <svg
+              class="inline-block align-middle size-1 md:size-1.5"
+              viewBox="0 0 8 8"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <circle cx="4" cy="4" r="4" fill="currentColor" />
+            </svg>
+          ) : null}
+
           <a
             href={item.href}
             class="font-serif text-lg font-medium md:text-2xl styled-anchor"
