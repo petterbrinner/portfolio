@@ -42,7 +42,7 @@
 
   figure img,
   .styled-image {
-    @apply relative w-auto h-auto max-h-svh rounded-[2px] grayscale;
+    @apply relative w-auto h-auto max-h-svh rounded-[2px];
   }
 
   /* Target code blocks, but not code blocks inside pre tags */
@@ -61,6 +61,10 @@
 
 .duotone {
   @apply relative after:absolute after:inset-0 after:z-10 after:w-full after:h-full after:bg-mono-800 after:mix-blend-lighten;
+}
+
+.duotone img {
+  @apply grayscale;
 }
 
 .prose-mobile-h1 > h1:first-of-type {

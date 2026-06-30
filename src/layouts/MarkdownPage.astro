@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import type { MarkdownHeading } from "astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import Layout from "./Layout.astro";
+import { renderMarkdown } from "../lib/markdown";
 import { articleSchema, personSchema, websiteSchema } from "../lib/seo";
 
 interface Props {
@@ -18,9 +19,17 @@ const {
   task,
   solution,
   techStack,
+  custom,
   ogImage,
   noindex,
 } = page.data;
+
+const customSections = await Promise.all(
+  custom.map(async ({ label, content }) => ({
+    label,
+    html: await renderMarkdown(content),
+  })),
+);
 
 const siteUrl = Astro.site!.href;
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
@@ -103,6 +112,17 @@ const schema =
           </section>
         )
       }
+      {
+        customSections.map(({ label, html }) => (
+          <section class="grid gap-2">
+            <h2>{label}</h2>
+            <div
+              class="prose prose-sm dark:prose-invert max-w-none"
+              set:html={html}
+            />
+          </section>
+        ))
+      }
     </div>
   </aside>
   <main
@@ -142,7 +162,7 @@ const schema =
       (h1 as HTMLElement).offsetHeight + marginTop + marginBottom;
     document.documentElement.style.setProperty(
       "--h1-height",
-      `${totalHeight}px`,
+      `${totalHeight + 8}px`,
     );
   };
 

@@ -56,27 +56,26 @@ const jokes = [
     </a>
   </div>
   <ul
-    class="p-2 px-3 justify-end flex flex-col gap-x-2 text-right col-[nav-start/nav-end] row-[nav-start/nav-end]"
+    class="p-2 px-3 flex flex-col gap-x-2 text-right col-[nav-start/nav-end] row-[nav-start/nav-end]"
   >
     {
       navItems.map((item) => (
-        <li class="flex items-center justify-end gap-x-[0.33em]">
-          {isCurrentPage(item.href) ? (
-            <svg
-              class="inline-block align-middle size-1 md:size-1.5"
-              viewBox="0 0 8 8"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <circle cx="4" cy="4" r="4" fill="currentColor" />
-            </svg>
-          ) : null}
-
+        <li>
           <a
             href={item.href}
-            class="font-serif text-lg font-medium md:text-2xl styled-anchor"
+            class="flex! items-center justify-end gap-x-[0.33em] font-serif text-lg font-medium md:text-2xl styled-anchor"
           >
-            {item.label}
+            {isCurrentPage(item.href) ? (
+              <svg
+                class="inline-block align-middle size-1 md:size-1.5"
+                viewBox="0 0 8 8"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <circle cx="4" cy="4" r="4" fill="currentColor" />
+              </svg>
+            ) : null}
+            <span>{item.label}</span>
           </a>
         </li>
       ))

@@ -45,11 +45,13 @@ const schema = collectionPageSchema({
               <p class="text-sm">{c.data.description}</p>
               {/* <span>&rarr;</span> */}
               <div class="mt-auto duotone">
-                <img
-                  src="https://placehold.co/640x320?text=Case+Image"
-                  class="object-cover styled-image aspect-2/1"
-                  alt="Placeholder image"
-                />
+                {c.data.featuredImage && (
+                  <img
+                    src={c.data.featuredImage}
+                    class="object-cover styled-image aspect-2/1"
+                    alt={c.data.title}
+                  />
+                )}
               </div>
             </a>
           </li>
